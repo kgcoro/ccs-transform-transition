@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,11 +13,10 @@
             height: 200px;
             transform-style: preserve-3d;
             position: relative;
-            transition: all 1.5s;
         }
 
-        .card:hover {
-            transform: rotateY(180deg);
+        .card:hover .back {
+            opacity: 1;
         }
 
         .face {
@@ -28,19 +28,43 @@
         }
 
         .face.front {
-            background: seagreen;
+            background: teal;
         }
 
         .face.back {
-            background: steelblue;
-            transform: rotateY(180deg);
+            background: mediumaquamarine;
+            transition-duration: 0.6s;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .card {
+                transition: transform 0.5s;
+                transform-style: preserve-3d;
+            }
+
+            .card:hover {
+                transform: rotateY(180deg);
+            }
+
+            .face {
+                backface-visibility: hidden;
+            }
+
+            .back {
+                transform: rotateY(180deg);
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="card">
         <div class="face front"></div>
         <div class="face back"></div>
     </div>
 </body>
+
 </html>
